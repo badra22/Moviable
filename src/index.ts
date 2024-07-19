@@ -1,6 +1,9 @@
 import { API , Movie } from "./moviedb.js";
 import utils from "./utils.js";
-
+import "@popperjs/core/dist/umd/popper.min.js"
+import "bootstrap/dist/js/bootstrap.min.js"
+import "bootstrap/dist/css/bootstrap.min.css"
+import "../assets/global_styles.css"
 
 addEventListener('DOMContentLoaded', async () => {
     // create an instance of movies api
@@ -99,8 +102,10 @@ async function load_movie_details(movies_api : API, movie: Movie) {
         imgs_section.appendChild(img_element);
     })
     imgs_section.classList.add('mx-auto');
-    body.appendChild(details_div);
-    body.appendChild(imgs_section);
+    if(body) {
+        body.appendChild(details_div);
+        body.appendChild(imgs_section);
+    }
 }
 
 function update_movie_cards(movies_api : API, movies_ids : Array<number>) {
@@ -110,7 +115,7 @@ function update_movie_cards(movies_api : API, movies_ids : Array<number>) {
     const prev_list = document.querySelector('.movies-list div');
     const curr_list = document.createElement('div');
     curr_list.classList.add(...("row row-cols-1 row-cols-md-3 row-cols-lg-4 gap-5 m-5 justify-content-center".split(' ')));
-    movies_section.removeChild(prev_list);
+    if(movies_section && prev_list)movies_section.removeChild(prev_list);
 
     movies_ids.forEach(async id => {
         const movie = await Movie.create(movies_api, id);
@@ -138,7 +143,7 @@ function update_movie_cards(movies_api : API, movies_ids : Array<number>) {
         curr_list.appendChild(movie_card);
     });
 
-    movies_section.appendChild(curr_list);
+    if(movies_section)movies_section.appendChild(curr_list);
 
     return movies_ids;
 }

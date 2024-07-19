@@ -18,7 +18,6 @@ type Image = {
     width: number
 };
 
-
 export class API {
     private configs : any;
     private discover_movies_route: string = '/discover/movie';

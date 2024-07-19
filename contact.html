@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./assets/global_styles.css">
-
     <title>Moviable</title>
 </head>
 <body class="bg-black text-light">
@@ -52,11 +49,49 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script src="./node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
-    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- <script src="./dist/utils.js" type="module"></script> -->
-    <!-- <script src="./dist/moviedb.js" type="module"></script> -->
-    <script src="./src/handlers.js"></script>
-    <!-- <script src="./dist/main.js" type="module"></script> -->
+    <script>
+        emailjs.init({
+        publicKey: "abjXIRLE6GWaPkUqm",
+        });
+
+        async function contactFormHandler(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const comments = document.getElementById('comments').value;
+            console.log(email);
+            console.log(comments);
+
+            var templateParams = {
+                email: email,
+                comments: comments,
+            };
+
+            emailjs.send('service_4dd8f5f', 'template_ghpl0wl', templateParams).then(
+                (response) => {
+                console.log('SUCCESS!', response.status, response.text);
+                Swal.fire({
+                    title: 'Your Response Had been received!',
+                    text: 'Do you want to continue',
+                    icon: 'success',
+                    confirmButtonText: 'Cool',
+                    confirmButtonColor: 'var(--bs-success)',
+                    background: 'black'
+                })
+                },
+                (error) => {
+                console.log('FAILED...', error);
+                Swal.fire({
+                    title: 'There Was An Error, Please Try Again!',
+                    text: 'Do you want to continue',
+                    icon: 'error',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: 'var(--bs-success)',
+                    background: 'black'
+                })
+                },
+            );
+        }
+    </script>
+    <script type="module" src="./dist/moviable.js"></script>
 </body>
 </html>

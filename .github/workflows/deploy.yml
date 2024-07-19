@@ -24,9 +24,6 @@ jobs:
     - name: Build project
       run: npm run build
 
-    - name: Copy HTML files
-      run: cp *.html dist/
-
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:

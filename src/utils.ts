@@ -2,7 +2,7 @@ const update_pagination = function(curr_page) {
     // remove the old pagination list
     const pagination_section = document.querySelector('.custom-pagination');
     const last_pagination = document.querySelector('.custom-pagination div');
-    if(last_pagination)pagination_section.removeChild(last_pagination);
+    if(last_pagination && pagination_section)pagination_section.removeChild(last_pagination);
     
     // make the list on page numbers for the new one
     let pages;
@@ -42,7 +42,7 @@ const update_pagination = function(curr_page) {
     next.innerText = '>>';
     current_pagination.appendChild(next);
 
-    pagination_section.appendChild(current_pagination);
+    if(pagination_section)pagination_section.appendChild(current_pagination);
 }
 
 
@@ -50,15 +50,13 @@ const update_pagination = function(curr_page) {
 const remove_pagination = function() {
     const pagination_section = document.querySelector('.custom-pagination');
     const last_pagination = document.querySelector('.custom-pagination div');
-    if(last_pagination)pagination_section.removeChild(last_pagination);
+    if(last_pagination && pagination_section)pagination_section.removeChild(last_pagination);
 }
 
 function getParameterByName(name : string) : any {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
 }
-
-
 
 const utils = {
     update_pagination,
