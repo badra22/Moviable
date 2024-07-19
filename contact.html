@@ -10,7 +10,7 @@
 <body class="bg-black text-light">
     <nav class="navbar border-bottom border-success" style="--bs-border-opacity: .5;">
         <div class="container-fluid">
-            <a href="./index.html?page=1" class="navbar-brand">
+            <a class="navbar-brand" role="button">
                 <i class="fa-solid fa-film text-success fs-3 me-2"></i>
                 <span class="text-uppercase kanit-black-italic text-success fs-3">moviable</span>
             </a>
@@ -19,7 +19,7 @@
                     <input class="form-control me-2 bg-black text-light" id="searchbox" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success text-capitalize kanit-regular" type="submit" id="searchBtn">Search</button>
                 </form>
-                <button class="btn btn-success text-capitalize kanit-regular" type="button" onClick="location.href='/contact.html'">contact us</button>
+                <button class="btn btn-success text-capitalize kanit-regular" type="button" id="contactBtn">contact us</button>
             </div>
         </div>
     </nav>
@@ -49,6 +49,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="module" src="./dist/moviable.js"></script>
     <script>
         emailjs.init({
         publicKey: "abjXIRLE6GWaPkUqm",
@@ -58,8 +59,6 @@
             event.preventDefault();
             const email = document.getElementById('email').value;
             const comments = document.getElementById('comments').value;
-            console.log(email);
-            console.log(comments);
 
             var templateParams = {
                 email: email,
@@ -92,6 +91,5 @@
             );
         }
     </script>
-    <script type="module" src="./dist/moviable.js"></script>
 </body>
 </html>

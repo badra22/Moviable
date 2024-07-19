@@ -1,9 +1,27 @@
 import { API , Movie } from "./moviedb.js";
 import utils from "./utils.js";
+import { move_to } from "./utils.js";
 import "@popperjs/core/dist/umd/popper.min.js"
 import "bootstrap/dist/js/bootstrap.min.js"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "../assets/global_styles.css"
+
+document.querySelector(".navbar-brand").addEventListener('click', () => {
+    move_to('index.html?page=1');
+})
+
+document.querySelector("#contactBtn").addEventListener('click', () => {
+    move_to('contact.html');
+})
+
+document.querySelector('#searchForm').addEventListener('submit', event => {
+    event.preventDefault();
+    const searchbox = document.getElementById('searchbox') as HTMLInputElement;
+    console.log(searchbox.value);
+    let query = searchbox.value;
+    move_to(`index.html?page=1&query=${query}`);
+});
+
 
 addEventListener('DOMContentLoaded', async () => {
     // create an instance of movies api
@@ -44,7 +62,8 @@ addEventListener('DOMContentLoaded', async () => {
 
 async function redirect_movie_details(event) {
     const movie_id = event.target.getAttribute('data-id');
-    window.location.href = `/movie-details.html?id=${movie_id}`;
+    console.log(movie_id);
+    move_to(`movie-details.html?id=${movie_id}`);
 };
 
 async function load_movie_details(movies_api : API, movie: Movie) {

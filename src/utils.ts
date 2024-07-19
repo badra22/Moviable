@@ -58,10 +58,24 @@ function getParameterByName(name : string) : any {
     return urlParams.get(name);
 }
 
+function getBaseUrl() {
+    const url = window.location.href;
+    const pathName = window.location.pathname;
+    const lastSlashIndex = pathName.lastIndexOf('/');
+    const baseUrl = url.substring(0, url.indexOf(pathName)) + pathName.substring(0, lastSlashIndex + 1);
+    return baseUrl;
+}
+
+export function move_to(route: string) {
+    window.location.href = `${getBaseUrl()}${route}`;
+}
+
+
 const utils = {
     update_pagination,
     remove_pagination,
-    getParameterByName
+    getParameterByName,
+    move_to
 }
 
 export default utils;
