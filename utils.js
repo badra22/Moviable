@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.move_to = move_to;
 const update_pagination = function (curr_page) {
     // remove the old pagination list
     const pagination_section = document.querySelector('.custom-pagination');
@@ -54,9 +55,20 @@ function getParameterByName(name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
 }
+function getBaseUrl() {
+    const url = window.location.href;
+    const pathName = window.location.pathname;
+    const lastSlashIndex = pathName.lastIndexOf('/');
+    const baseUrl = url.substring(0, url.indexOf(pathName)) + pathName.substring(0, lastSlashIndex + 1);
+    return baseUrl;
+}
+function move_to(route) {
+    window.location.href = `${getBaseUrl()}${route}`;
+}
 const utils = {
     update_pagination,
     remove_pagination,
-    getParameterByName
+    getParameterByName,
+    move_to
 };
 exports.default = utils;

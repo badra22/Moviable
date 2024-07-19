@@ -14,10 +14,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const moviedb_js_1 = require("./moviedb.js");
 const utils_js_1 = __importDefault(require("./utils.js"));
+const utils_js_2 = require("./utils.js");
 require("@popperjs/core/dist/umd/popper.min.js");
 require("bootstrap/dist/js/bootstrap.min.js");
 require("bootstrap/dist/css/bootstrap.min.css");
 require("../assets/global_styles.css");
+document.querySelector(".navbar-brand").addEventListener('click', () => {
+    (0, utils_js_2.move_to)('index.html?page=1');
+});
+document.querySelector("#contactBtn").addEventListener('click', () => {
+    (0, utils_js_2.move_to)('contact.html');
+});
+document.querySelector('#searchForm').addEventListener('submit', event => {
+    event.preventDefault();
+    const searchbox = document.getElementById('searchbox');
+    console.log(searchbox.value);
+    let query = searchbox.value;
+    (0, utils_js_2.move_to)(`index.html?page=1&query=${query}`);
+});
 addEventListener('DOMContentLoaded', () => __awaiter(void 0, void 0, void 0, function* () {
     // create an instance of movies api
     const movies_api = yield moviedb_js_1.API.create();
@@ -53,7 +67,8 @@ addEventListener('DOMContentLoaded', () => __awaiter(void 0, void 0, void 0, fun
 function redirect_movie_details(event) {
     return __awaiter(this, void 0, void 0, function* () {
         const movie_id = event.target.getAttribute('data-id');
-        window.location.href = `/movie-details.html?id=${movie_id}`;
+        console.log(movie_id);
+        (0, utils_js_2.move_to)(`movie-details.html?id=${movie_id}`);
     });
 }
 ;
